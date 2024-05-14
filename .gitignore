@@ -1,0 +1,10 @@
+.DS_Store
+
+*.o
+
+*.lib
+*.a
+
+*.out
+*.swp
+*.dSYM/
