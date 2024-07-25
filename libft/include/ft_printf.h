@@ -5,36 +5,24 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: yoaoki <yoaoki@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/01 02:42:02 by yoaoki            #+#    #+#             */
-/*   Updated: 2024/05/15 04:18:17 by yoaoki           ###   ########.fr       */
+/*   Created: 2024/07/16 11:55:39 by yoaoki            #+#    #+#             */
+/*   Updated: 2024/07/17 20:02:02 by yoaoki           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FT_PRINTF_H
 # define FT_PRINTF_H
 
-# include "libft.h"
 # include <stdarg.h>
+# include <unistd.h>
 
-# define BASE "0123456789abcdef"
-# define BASE_L "0123456789ABCDEF"
+# define HEX_LOWER "0123456789abcdef"
+# define HEX_UPPER "0123456789ABCDEF"
 
-int		ft_printf(const char *format, ...);
+int		ft_printf(const char *fmt, ...);
+void	put_char(char c, int *len);
+void	put_string(char *str, int *len);
+void	put_pointer(unsigned long long num, int *len);
+void	put_digit(long long int num, int base, int *len, char *hex);
 
-int		ft_put_convert(const char *str, va_list *ap);
-int		ft_print_char(va_list *ap);
-int		ft_print_str(va_list *ap);
-int		ft_print_ptr(va_list *ap);
-int		ft_print_int(va_list *ap);
-int		ft_print_uint(va_list *ap);
-int		ft_print_hex(va_list *ap);
-int		ft_print_hexup(va_list *ap);
-int		ft_print_percent(void);
-
-// utils
-int		ft_numlen(long long n);
-void	ft_putuint_fd(unsigned int n, int fd);
-void	ft_putptr_fd(unsigned long long n, int fd);
-void	ft_puthex_fd(unsigned int n, int fd);
-void	ft_puthexup_fd(unsigned int n, int fd);
 #endif
