@@ -6,7 +6,7 @@
 #    By: yoaoki <yoaoki@student.42tokyo.jp>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/15 04:18:30 by yoaoki            #+#    #+#              #
-#    Updated: 2024/07/25 22:27:57 by yoaoki           ###   ########.fr        #
+#    Updated: 2024/08/02 18:56:23 by yoaoki           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,7 @@ INCLUDE = include/
 SRC_DIR = src/
 OBJ_DIR = src/
 CC = cc
-CFLAGS = -Wall -Wextra -Werror -I
+CFLAGS = -Wall -Wextra -Werror
 RM = rm -f
 AR = ar rcs
 ECHO = echo -e
@@ -52,7 +52,7 @@ $(NAME):	$(OBJ)
 			$(AR) $(NAME) $(OBJ)
 
 $(OBJ_DIR)%.o : $(SRC_DIR)%.c
-			$(CC) $(CFLAGS) $(INCLUDE) -c $< -o $@
+			$(CC) $(CFLAGS) -I $(INCLUDE) -c $< -o $@
 
 clean:
 			$(RM)  $(OBJ)
