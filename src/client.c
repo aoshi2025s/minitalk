@@ -6,14 +6,11 @@
 /*   By: yoaoki <yoaoki@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/28 00:33:57 by yoaoki            #+#    #+#             */
-/*   Updated: 2024/07/28 00:37:12 by yoaoki           ###   ########.fr       */
+/*   Updated: 2024/08/02 19:30:00 by yoaoki           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <signal.h>
-#include <stdio.h>
-#include <stdlib.h>
-#include <unistd.h>
+#include "minitalk.h"
 
 void	send_bits(int pid, char c)
 {
@@ -37,11 +34,11 @@ int	main(int argc, char **argv)
 
 	if (argc != 3)
 	{
-		printf("Error: wrong format.\n");
-		printf("Try: ./client [PID] [MESSAGE]\n");
+		ft_printf("Error: wrong format.\n");
+		ft_printf("Try: ./client [PID] [MESSAGE]\n");
 		return (1);
 	}
-	pid = atoi(argv[1]);
+	pid = ft_atoi(argv[1]);
 	while (*argv[2])
 	{
 		send_bits(pid, *argv[2]);

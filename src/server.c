@@ -6,14 +6,11 @@
 /*   By: yoaoki <yoaoki@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 05:34:16 by yoaoki            #+#    #+#             */
-/*   Updated: 2024/08/02 19:17:08 by yoaoki           ###   ########.fr       */
+/*   Updated: 2024/08/02 19:30:39 by yoaoki           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <signal.h>
-#include <stdio.h>
-#include <stdlib.h>
-#include <unistd.h>
+#include "minitalk.h"
 
 void	ft_handler(int signal)
 {
@@ -25,7 +22,7 @@ void	ft_handler(int signal)
 	bit++;
 	if (bit == 8)
 	{
-		printf("%c", i);
+		ft_printf("%c", i);
 		bit = 0;
 		i = 0;
 	}
@@ -36,12 +33,12 @@ int	main(int argc, char **argv)
 	(void)argv;
 	if (argc != 1)
 	{
-		printf("Error: wrong format.\n");
-		printf("Try: ./server\n");
+		ft_printf("Error: wrong format.\n");
+		ft_printf("Try: ./server\n");
 		return (1);
 	}
-	printf("[PID]: %d\n", getpid());
-	printf("Waiting for a message...\n");
+	ft_printf("[PID]: %d\n", getpid());
+	ft_printf("Waiting for a message...\n");
 	while (1)
 	{
 		signal(SIGUSR1, ft_handler);
