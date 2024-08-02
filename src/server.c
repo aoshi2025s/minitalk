@@ -6,7 +6,7 @@
 /*   By: yoaoki <yoaoki@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 05:34:16 by yoaoki            #+#    #+#             */
-/*   Updated: 2024/07/28 00:29:44 by yoaoki           ###   ########.fr       */
+/*   Updated: 2024/08/02 19:17:08 by yoaoki           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ void	ft_handler(int signal)
 
 int	main(int argc, char **argv)
 {
+	(void)argv;
 	if (argc != 1)
 	{
 		printf("Error: wrong format.\n");

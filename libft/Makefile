@@ -6,7 +6,7 @@
 #    By: yoaoki <yoaoki@student.42tokyo.jp>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/15 04:18:30 by yoaoki            #+#    #+#              #
-#    Updated: 2024/08/02 18:56:23 by yoaoki           ###   ########.fr        #
+#    Updated: 2024/08/02 18:57:41 by yoaoki           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,6 @@ CC = cc
 CFLAGS = -Wall -Wextra -Werror
 RM = rm -f
 AR = ar rcs
-ECHO = echo -e
 
 SRC_LIBFT = ft_isalpha ft_isdigit ft_isalnum ft_isascii \
 			ft_isprint ft_strlen ft_memset ft_toupper ft_tolower\
