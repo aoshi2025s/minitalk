@@ -1,27 +1,22 @@
-#include <stdlib.h>
-#include <unistd.h>
-#include <stdio.h>
-#include <signal.h>
+#include "minitalk.h"
 
+// use async-signal safe function (do not use printf)
 void ft_confirm(int signal, siginfo_t *info, void *s) {
+	(void)signal;
 	(void)info;
 	(void)s;
-	(void)signal;
-	printf("Message received!\n");
+	write(1, "Message received!\n", 18); 
 }
 
 void ft_send_bits(int pid, char i) {
 	int bit;
-
 	bit = 0;
 	while (bit < 8) {
 		if ((i & (1 << bit)) != 0)
 			kill(pid, SIGUSR1);
 		else
 			kill(pid, SIGUSR2);
-		// これもusleep(1)でもあれば今の所動作する。
-		// 割り込み中にもう一方のシグナルが発生するとバグる(文字化け？)
-		usleep(100); // レースコンディション対策って何？
+		usleep(100);
 		bit++;
 	}
 }
@@ -32,17 +27,20 @@ int main(int argc, char **argv) {
 
 	sa.sa_sigaction = ft_confirm;
 	sigemptyset(&sa.sa_mask);
-	sa.sa_flags = 0;
-	sigaction(SIGUSR2, &sa, NULL);
+	sa.sa_flags = SA_SIGINFO;
+	if (sigaction(SIGUSR2, &sa, NULL) == -1) {
+		ft_printf("Error client sigaction\n");
+		exit(1);
+	}
 
 	if (argc != 3) {
-		printf("Usage: ./client [PID] [Message]\n");
+		ft_printf("Usage: ./client [PID] [Message]\n");
 		return (1);
 	}
 
-	pid = atoi(argv[1]);
+	pid = ft_atoi(argv[1]);
 	if (pid <= 0 || kill(pid, 0) == -1) {
-		printf("Error: PID not valid\n");
+		ft_printf("Error: PID not valid\n");
 		exit(1);
 	}
 	while (*argv[2]) {

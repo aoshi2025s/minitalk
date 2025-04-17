@@ -1,8 +1,4 @@
-#include <stdio.h>
-#include <signal.h>
-#include <unistd.h>
-
-// TODO: 非同期安全な関数とは？
+#include "minitalk.h"
 
 void ft_handler(int signal, siginfo_t *info, void *s) {
 	static int bit = 0;
@@ -29,15 +25,17 @@ int main(void) {
 	struct sigaction sa;
 
 	pid = getpid();
-	printf("[PID]: %d\n", pid);
-	printf("Waiting for a message...\n");
+	ft_printf("[PID]: %d\n", pid);
+	ft_printf("Waiting for a message...\n");
 
 	sa.sa_sigaction = ft_handler;
 	sigemptyset(&sa.sa_mask);
-	sa.sa_flags = SA_SIGINFO; // sa.sa_flags = 0じゃだめ？
+	sa.sa_flags = SA_SIGINFO;
 	
-	sigaction(SIGUSR1, &sa, NULL);
-	sigaction(SIGUSR2, &sa, NULL);
+	if (sigaction(SIGUSR1, &sa, NULL) == -1
+		|| sigaction(SIGUSR2, &sa, NULL) == -1) {
+		ft_printf("Error: server sigaction\n");
+	}
 
 	while (1)
 		pause();

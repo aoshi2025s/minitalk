@@ -6,15 +6,13 @@
 #    By: aoshi <aoshi@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/15 04:18:30 by yoaoki            #+#    #+#              #
-#    Updated: 2024/09/13 04:30:40 by yoaoki           ###   ########.fr        #
+#    Updated: 2025/04/18 05:22:16 by yoaoki           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = project
 NAME_CLIENT = client
 NAME_SERVER = server
-NAMEBC = client_bonus
-NAMEBS = server_bonus
 INCLUDE = include/
 LIBFT = libft
 SRC_DIR = src/
@@ -26,20 +24,12 @@ AR = ar rcs
 
 SRC_CL_FILES = client
 SRC_SV_FILES = server
-SRCBC_FILES = client_bonus
-SRCBS_FILES = server_bonus
 
 SRC_CL = $(addprefix $(SRC_DIR), $(addsuffix .c, $(SRC_CL_FILES)))
 OBJ_CL = $(addprefix $(OBJ_DIR), $(addsuffix .o, $(SRC_CL_FILES)))
 
 SRC_SV = $(addprefix $(SRC_DIR), $(addsuffix .c, $(SRC_SV_FILES)))
 OBJ_SV = $(addprefix $(OBJ_DIR), $(addsuffix .o, $(SRC_SV_FILES)))
-
-SRCBC =	$(addprefix $(SRC_DIR), $(addsuffix .c, $(SRCBC_FILES)))
-OBJBC =	$(addprefix $(OBJ_DIR), $(addsuffix .o, $(SRCBC_FILES)))
-
-SRCBS =	$(addprefix $(SRC_DIR), $(addsuffix .c, $(SRCBS_FILES)))
-OBJBS =	$(addprefix $(OBJ_DIR), $(addsuffix .o, $(SRCBS_FILES)))
 
 OBJF = .chache_exists
 
@@ -65,19 +55,6 @@ $(OBJF):
 	mkdir -p $(OBJ_DIR)
 	touch $(OBJF)
 
-bonus:
-	make -C $(LIBFT)
-	cp $(LIBFT)/libft.a .
-	make allbonus
-
-allbonus:	$(NAMEBC) $(NAMEBS)
-
-$(NAMEBC):	$(OBJBC) $(OBJF)
-			@$(CC) $(FLAGS) $(OBJBC) -I $(INCLUDE) libft.a -o $(NAMEBC)
-
-$(NAMEBS):	$(OBJBS) $(OBJF)
-			@$(CC) $(FLAGS) $(OBJBS) -I $(INCLUDE) libft.a -o $(NAMEBS)
-
 clean:
 			$(RM) -r $(OBJ_DIR)
 			$(RM) $(OBJF)
@@ -90,4 +67,4 @@ fclean:		clean
 
 re:			fclean start all
 
-.PHONY:		start all clean fclean re bonus
+.PHONY:		start all clean fclean re
