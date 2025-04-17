@@ -6,7 +6,7 @@
 /*   By: yoaoki <yoaoki@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/18 06:54:47 by yoaoki            #+#    #+#             */
-/*   Updated: 2025/04/18 06:56:51 by yoaoki           ###   ########.fr       */
+/*   Updated: 2025/04/18 07:07:06 by yoaoki           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ int	main(void)
 		|| sigaction(SIGUSR2, &sa, NULL) == -1)
 	{
 		ft_printf("Error: server sigaction\n");
+		exit(1);
 	}
 	while (1)
 		pause();
