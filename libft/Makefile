@@ -6,7 +6,7 @@
 #    By: yoaoki <yoaoki@student.42tokyo.jp>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/15 04:18:30 by yoaoki            #+#    #+#              #
-#    Updated: 2024/08/02 18:57:41 by yoaoki           ###   ########.fr        #
+#    Updated: 2025/04/20 15:22:40 by yoaoki           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,15 +32,11 @@ SRC_LIBFT = ft_isalpha ft_isdigit ft_isalnum ft_isascii \
 
 SRC_PRINTF = ft_printf put
 
-SRC_GNL = get_next_line_bonus
-
 LIBFT_DIR = libft/
 PRINTF_DIR = ft_printf/
-GNL_DIR = get_next_line/
 
 SRC_FILES += $(addprefix $(LIBFT_DIR), $(SRC_LIBFT))
 SRC_FILES += $(addprefix $(PRINTF_DIR), $(SRC_PRINTF))
-SRC_FILES += $(addprefix $(GNL_DIR), $(SRC_GNL))
 
 SRC = $(addprefix $(SRC_DIR), $(addsuffix .c, $(SRC_FILES)))
 OBJ = $(addprefix $(OBJ_DIR), $(addsuffix .o, $(SRC_FILES)))

@@ -6,7 +6,7 @@
 /*   By: yoaoki <yoaoki@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/18 06:54:47 by yoaoki            #+#    #+#             */
-/*   Updated: 2025/04/18 07:07:06 by yoaoki           ###   ########.fr       */
+/*   Updated: 2025/04/20 16:37:49 by yoaoki           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ void	ft_handler(int signal, siginfo_t *info, void *s)
 	(void)s;
 	if (signal == SIGUSR1)
 		i |= (1 << bit);
+	kill(info->si_pid, SIGUSR1);
 	bit++;
 	if (bit == 8)
 	{

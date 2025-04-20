@@ -6,19 +6,23 @@
 /*   By: yoaoki <yoaoki@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/18 06:54:30 by yoaoki            #+#    #+#             */
-/*   Updated: 2025/04/18 07:01:25 by yoaoki           ###   ########.fr       */
+/*   Updated: 2025/04/20 17:42:53 by yoaoki           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minitalk.h"
 
+volatile sig_atomic_t	g_ack = 0;
+
 // use async-signal safe function (do not use printf)
 void	ft_confirm(int signal, siginfo_t *info, void *s)
 {
-	(void)signal;
 	(void)info;
 	(void)s;
-	write(1, "Message received!\n", 18);
+	if (signal == SIGUSR2)
+		write(1, "Message received!\n", 18);
+	if (signal == SIGUSR1)
+		g_ack = 1;
 }
 
 void	ft_send_bits(int pid, char i)
@@ -28,10 +32,13 @@ void	ft_send_bits(int pid, char i)
 	bit = 0;
 	while (bit < 8)
 	{
+		g_ack = 0;
 		if ((i & (1 << bit)) != 0)
 			kill(pid, SIGUSR1);
 		else
 			kill(pid, SIGUSR2);
+		while (g_ack == 0)
+			pause();
 		usleep(100);
 		bit++;
 	}
@@ -63,7 +70,8 @@ int	main(int argc, char **argv)
 	sa.sa_sigaction = ft_confirm;
 	sigemptyset(&sa.sa_mask);
 	sa.sa_flags = SA_SIGINFO;
-	if (sigaction(SIGUSR2, &sa, NULL) == -1)
+	if (sigaction(SIGUSR2, &sa, NULL) == -1
+		|| sigaction(SIGUSR1, &sa, NULL) == -1)
 	{
 		ft_printf("Error client sigaction\n");
 		exit(1);
